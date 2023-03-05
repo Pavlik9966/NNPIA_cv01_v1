@@ -35,7 +35,7 @@ public class AppUser {
     @Column
     private boolean active;
 
-    @Column(name = "creation_data")
+    @Column(name = "creation_date")
     private LocalDateTime creationDate;
 
     @Column(name = "update_date")
