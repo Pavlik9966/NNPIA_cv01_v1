@@ -1,5 +1,6 @@
-package com.nnpia.cv01;
+package com.nnpia.cv01.controllers;
 
+import com.nnpia.cv01.domain.Person;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
  * sequence format and in the form of a map with key/value pairs. JSON and YAML uses different indentation
  * styles: JSON uses tabs, whereas YAML uses a hyphen (-) followed by whitespace.
  * */
+
 @RestController
 public class HelloController {
     @GetMapping("")

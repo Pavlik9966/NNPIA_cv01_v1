@@ -1,0 +1,68 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-1
+      author: Pavlik9966
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: username
+                  value: username1
+              - column:
+                  name: password
+                  value: password1
+              - column:
+                  name: active
+                  value: true
+              - column:
+                  name: creation_date
+                  value: now()
+              - column:
+                  name: update_date
+                  value: now()
+            tableName: app_user
+
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: name
+                  value: role1
+            tableName: role
+
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: title
+                  value: title1
+              - column:
+                  name: description
+                  value: description1
+              - column:
+                  name: creation_date
+                  value: now()
+              - column:
+                  name: update_date
+                  value: now()
+              - column:
+                  name: author_id
+                  value: 1
+            tableName: task
+
+        - insert:
+            columns:
+              - column:
+                  name: app_user_id
+                  value: 1
+              - column:
+                  name: role_id
+                  value: 1
+            tableName: app_user_role
