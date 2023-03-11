@@ -13,5 +13,5 @@ public interface IAppUserRepository extends JpaRepository<AppUser, Long> {
     List<AppUser> findByActive(boolean active);
 
     @Query("select au from AppUser au join au.roles r where r = :role")
-    List<AppUser> findAppUsersByRole(Role role);
+    List<AppUser> findUsersByRole(Role role);
 }

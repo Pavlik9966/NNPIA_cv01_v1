@@ -2,8 +2,12 @@ package com.nnpia.cv01.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -21,19 +25,24 @@ import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "app_user")
 public class AppUser {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 
     @Column
+    @NotBlank
+    @NotNull
+    @Size(max = 255, min = 1)
     private String username;
 
     @Column
     private String password;
 
     @Column
-    private boolean active;
+    private Boolean active;
 
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
@@ -48,4 +57,21 @@ public class AppUser {
     @JsonManagedReference
     @ManyToMany(mappedBy = "users")
     private List<Role> roles = Collections.emptyList();
+
+    public AppUser(Long id, String username, String password, Boolean active, LocalDateTime creationDate, LocalDateTime updateDate) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.active = active;
+        this.creationDate = creationDate;
+        this.updateDate = updateDate;
+    }
+
+    public AppUser(String username, String password, Boolean active, LocalDateTime creationDate, LocalDateTime updateDate) {
+        this.username = username;
+        this.password = password;
+        this.active = active;
+        this.creationDate = creationDate;
+        this.updateDate = updateDate;
+    }
 }
