@@ -72,6 +72,7 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: app_user
             validate: true
+            onDelete: CASCADE
 
         - addForeignKeyConstraint:
             baseColumnNames: app_user_id
@@ -80,6 +81,7 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: app_user
             validate: true
+            onDelete: CASCADE
 
         - addForeignKeyConstraint:
             baseColumnNames: role_id
@@ -88,3 +90,16 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: role
             validate: true
+            onDelete: CASCADE
+
+        - dropForeignKeyConstraint:
+            - baseTableName: task
+            - constraintName: task_author_id_fk
+
+        - dropForeignKeyConstraint:
+            - baseTableName: app_user_role
+            - constraintName: app_user_role_author_id_fk
+
+        - dropForeignKeyConstraint:
+            - baseTableName: app_user_role
+            - constraintName: app_user_role_role_id_fk
