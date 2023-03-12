@@ -65,18 +65,6 @@ databaseChangeLog:
                   constraints:
                     nullable: false
 
-        - dropForeignKeyConstraint:
-            - baseTableName: task
-            - constraintName: task_author_id_fk
-
-        - dropForeignKeyConstraint:
-            - baseTableName: app_user_role
-            - constraintName: app_user_role_author_id_fk
-
-        - dropForeignKeyConstraint:
-            - baseTableName: app_user_role
-            - constraintName: app_user_role_role_id_fk
-
         - addForeignKeyConstraint:
             baseColumnNames: author_id
             baseTableName: task
@@ -103,3 +91,15 @@ databaseChangeLog:
             referencedTableName: role
             validate: true
             onDelete: CASCADE
+
+        - dropForeignKeyConstraint:
+            - baseTableName: task
+            - constraintName: task_author_id_fk
+
+        - dropForeignKeyConstraint:
+            - baseTableName: app_user_role
+            - constraintName: app_user_role_author_id_fk
+
+        - dropForeignKeyConstraint:
+            - baseTableName: app_user_role
+            - constraintName: app_user_role_role_id_fk

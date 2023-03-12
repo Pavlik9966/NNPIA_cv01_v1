@@ -13,7 +13,7 @@ databaseChangeLog:
                   value: username1
               - column:
                   name: password
-                  value: password1
+                  value: $2a$10$Vk5LkS9lrVpmdWTGWQg0W.7FblDXyIzaPEBmrgXznoQOevkfGsvm.
               - column:
                   name: active
                   value: true

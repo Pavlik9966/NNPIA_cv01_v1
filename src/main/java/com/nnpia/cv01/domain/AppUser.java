@@ -50,11 +50,11 @@ public class AppUser {
     @Column(name = "update_date")
     private LocalDateTime updateDate;
 
-    @JsonManagedReference
+    // @JsonManagedReference
     @OneToMany(mappedBy = "author")
     private List<Task> tasks = Collections.emptyList();
 
-    @JsonManagedReference
+    // @JsonManagedReference
     @ManyToMany(mappedBy = "users")
     private List<Role> roles = Collections.emptyList();
 

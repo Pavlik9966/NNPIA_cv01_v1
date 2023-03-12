@@ -36,3 +36,11 @@ databaseChangeLog:
                   type: timestamptz
                   constraints:
                     nullable: false
+
+        - addAutoIncrement:
+            columnDataType: bigint
+            columnName: id
+            generationType: ALWAYS
+            incrementBy: 1
+            startWith: 0
+            tableName: app_user
