@@ -4,6 +4,7 @@ import com.nnpia.cv01.domain.AppUser;
 import com.nnpia.cv01.services.AppUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -42,6 +43,7 @@ public class AppUserController {
 
     @PostMapping("")
     public ResponseEntity<AppUser> createUser(@RequestBody @Validated final AppUser appUser) {
+        appUser.setPassword(new BCryptPasswordEncoder().encode(appUser.getPassword()));
         AppUser result = appUserService.createUser(appUser);
         return ResponseEntity.ok(result);
     }
@@ -52,7 +54,7 @@ public class AppUserController {
                 new AppUser(
                         id,
                         appUser.getUsername(),
-                        appUser.getPassword(),
+                        new BCryptPasswordEncoder().encode(appUser.getPassword()),
                         appUser.getActive(),
                         appUser.getCreationDate(),
                         appUser.getUpdateDate()

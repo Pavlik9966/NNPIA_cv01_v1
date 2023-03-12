@@ -51,4 +51,13 @@ public class AppUserService {
     public void deleteUser(final Long id) {
         appUserRepository.deleteById(id);
     }
+
+    public AppUser findUserByUsername(final String username) throws ResponseStatusException {
+        AppUser result = appUserRepository.findAppUserByUsername(username);
+
+        if (result == null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User with username: " + username + " not found.");
+
+        return result;
+    }
 }
