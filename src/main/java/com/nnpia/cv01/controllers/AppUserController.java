@@ -1,13 +1,13 @@
 package com.nnpia.cv01.controllers;
 
-import com.nnpia.cv01.domain.AppUser;
+import com.nnpia.cv01.domains.AppUser;
 import com.nnpia.cv01.services.AppUserService;
+import com.nnpia.cv01.services.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class AppUserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AppUser> getUserById(@PathVariable final Long id) throws ResponseStatusException {
+    public ResponseEntity<AppUser> getUserById(@PathVariable final Long id) throws ResourceNotFoundException {
         AppUser result = appUserService.findUserById(id);
         return ResponseEntity.ok(result);
     }
@@ -36,7 +36,7 @@ public class AppUserController {
     }
 
     @GetMapping("/role/{name}")
-    public ResponseEntity<List<AppUser>> getUsersByRole(@PathVariable String name) throws ResponseStatusException {
+    public ResponseEntity<List<AppUser>> getUsersByRole(@PathVariable String name) throws ResourceNotFoundException {
         List<AppUser> result = appUserService.findUsersByRole(name);
         return ResponseEntity.ok(result);
     }

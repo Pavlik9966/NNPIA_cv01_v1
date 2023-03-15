@@ -1,13 +1,11 @@
 package com.nnpia.cv01.services;
 
-import com.nnpia.cv01.domain.AppUser;
-import com.nnpia.cv01.domain.Role;
+import com.nnpia.cv01.domains.AppUser;
+import com.nnpia.cv01.domains.Role;
 import com.nnpia.cv01.repositories.IAppUserRepository;
 import com.nnpia.cv01.repositories.IRoleRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,20 +20,18 @@ public class AppUserService {
         return appUserRepository.findByActive(true);
     }
 
-    public AppUser findUserById(final Long id) throws ResponseStatusException {
+    public AppUser findUserById(final Long id) throws ResourceNotFoundException {
         Optional<AppUser> result = appUserRepository.findById(id);
 
-        if (result.isEmpty())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User with id: " + id + " not found.");
+        if (result.isEmpty()) throw new ResourceNotFoundException();
 
         return result.get();
     }
 
-    public List<AppUser> findUsersByRole(final String roleName) {
+    public List<AppUser> findUsersByRole(final String roleName) throws ResourceNotFoundException {
         Role roleResult = roleRepository.findRoleByName(roleName);
 
-        if (roleResult == null)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Role: " + roleName + " not found.");
+        if (roleResult == null) throw new ResourceNotFoundException();
 
         return appUserRepository.findUsersByRole(roleResult);
     }
@@ -52,11 +48,10 @@ public class AppUserService {
         appUserRepository.deleteById(id);
     }
 
-    public AppUser findUserByUsername(final String username) throws ResponseStatusException {
+    public AppUser findUserByUsername(final String username) throws ResourceNotFoundException {
         AppUser result = appUserRepository.findAppUserByUsername(username);
 
-        if (result == null)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User with username: " + username + " not found.");
+        if (result == null) throw new ResourceNotFoundException();
 
         return result;
     }
