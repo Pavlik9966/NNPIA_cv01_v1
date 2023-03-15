@@ -7,13 +7,13 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 1
+                  value: 0
               - column:
                   name: username
                   value: username1
               - column:
                   name: password
-                  value: $2a$10$Vk5LkS9lrVpmdWTGWQg0W.7FblDXyIzaPEBmrgXznoQOevkfGsvm.
+                  value: password1
               - column:
                   name: active
                   value: true

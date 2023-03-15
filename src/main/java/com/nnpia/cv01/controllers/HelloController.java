@@ -1,6 +1,6 @@
 package com.nnpia.cv01.controllers;
 
-import com.nnpia.cv01.domain.Person;
+import com.nnpia.cv01.domains.Person;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

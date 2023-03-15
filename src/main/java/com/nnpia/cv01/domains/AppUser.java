@@ -1,6 +1,5 @@
-package com.nnpia.cv01.domain;
+package com.nnpia.cv01.domains;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

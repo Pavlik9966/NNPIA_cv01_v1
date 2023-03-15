@@ -1,5 +1,6 @@
 package com.nnpia.cv01.controllers;
 
+import com.nnpia.cv01.domains.AppUser;
 import com.nnpia.cv01.services.AppUserService;
 import com.nnpia.cv01.services.JwtUserDetailsService;
 import com.nnpia.cv01.utils.JwtTokenUtil;
@@ -14,6 +15,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -67,6 +70,20 @@ public class AuthenticationController {
             responseMap.put("message", "Something went wrong.");
             return ResponseEntity.status(500).body(responseMap);
         }
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(@RequestBody @Validated final AppUser appUser) {
+        appUser.setPassword(new BCryptPasswordEncoder().encode(appUser.getPassword()));
+        appUserService.createUser(appUser);
+        UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(appUser.getUsername());
+        String token = jwtTokenUtil.generateToken(userDetails);
+        Map<String, Object> responseMap = new HashMap<>();
+        responseMap.put("error", false);
+        responseMap.put("username", appUser.getUsername());
+        responseMap.put("message", "Account created successfully.");
+        responseMap.put("token", token);
+        return ResponseEntity.ok(responseMap);
     }
 
     @GetMapping("/username")

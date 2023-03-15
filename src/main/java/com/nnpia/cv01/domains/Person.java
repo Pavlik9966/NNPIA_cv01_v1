@@ -1,4 +1,4 @@
-package com.nnpia.cv01.domain;
+package com.nnpia.cv01.domains;
 
 import lombok.Data;
 
