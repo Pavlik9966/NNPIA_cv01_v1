@@ -12,6 +12,10 @@ import java.util.List;
 public class TaskService {
     private final ITaskRepository taskRepository;
 
+    public List<Task> findAllTasks() {
+        return taskRepository.findAll();
+    }
+
     public List<Task> findAllTasksByAppUserId(final Long id) {
         return taskRepository.findAllByAuthorId(id);
     }
