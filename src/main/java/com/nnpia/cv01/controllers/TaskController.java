@@ -1,5 +1,6 @@
 package com.nnpia.cv01.controllers;
 
+import com.nnpia.cv01.services.ResourceNotFoundException;
 import com.nnpia.cv01.services.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,13 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
+    public ResponseEntity<?> getTaskById(@PathVariable final Long id) throws ResourceNotFoundException {
+        var result = taskService.findTaskById(id);
+
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/user/{id}")
     public ResponseEntity<?> getAllTasksByAppUserId(@PathVariable final Long id) {
         var result = taskService.findAllTasksByAppUserId(id);
 

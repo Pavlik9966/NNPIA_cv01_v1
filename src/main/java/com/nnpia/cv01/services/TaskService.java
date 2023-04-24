@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -18,5 +19,13 @@ public class TaskService {
 
     public List<Task> findAllTasksByAppUserId(final Long id) {
         return taskRepository.findAllByAuthorId(id);
+    }
+
+    public Task findTaskById(final Long id) throws ResourceNotFoundException {
+        Optional<Task> result = taskRepository.findById(id);
+
+        if (result.isEmpty()) throw new ResourceNotFoundException();
+
+        return result.get();
     }
 }
